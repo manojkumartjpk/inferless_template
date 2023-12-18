@@ -17,7 +17,7 @@ class InferlessPythonModel:
             folder_path = os.environ.get('MODEL_WEIGHTS_DIR')
             file_path = os.path.join(folder_path, 'example.txt')
             with open(file_path, 'w') as file:
-                file.write('manoj')
+                file.write('sample weights')
             file.close()
         except Exception as err:
             print("download weights exception",str(err), flush=True)
