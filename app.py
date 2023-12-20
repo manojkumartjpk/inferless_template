@@ -8,19 +8,14 @@ import os
 class InferlessPythonModel:
 
     # replace ##task_type## and ##huggingface_name## with appropriate values
+    folder_path = os.environ.get('MODEL_WEIGHTS_DIR')
     def initialize(self):
-        self.generator = pipeline("text-generation", model="EleutherAI/gpt-neo-125M",device=0)
+        self.generator = pipeline("text-generation", folder_path ,device=0)
 
     def download_weights(self):
-        try:
-            print("download weights called", flush=True)
-            folder_path = os.environ.get('MODEL_WEIGHTS_DIR')
-            file_path = os.path.join(folder_path, 'example.txt')
-            with open(file_path, 'w') as file:
-                file.write('sample weights')
-            file.close()
-        except Exception as err:
-            print("download weights exception",str(err), flush=True)
+        text_generator = pipeline("text-generation", model="EleutherAI/gpt-neo-125M",device=0)
+        text_generator.save_pretrained(folder_path)
+        print("download weights called", flush=True)
         
     # inputs is a dictonary where the keys are input names and values are actual input data
     # e.g. in the below code the input name is prompt 
