@@ -8,11 +8,12 @@ import os
 class InferlessPythonModel:
 
     # replace ##task_type## and ##huggingface_name## with appropriate values
-    folder_path = os.environ.get('MODEL_WEIGHTS_DIR')
     def initialize(self):
+        folder_path = os.environ.get('MODEL_WEIGHTS_DIR')
         self.generator = pipeline("text-generation", folder_path ,device=0)
 
     def download_weights(self):
+        folder_path = os.environ.get('MODEL_WEIGHTS_DIR')
         text_generator = pipeline("text-generation", model="EleutherAI/gpt-neo-125M",device=0)
         text_generator.save_pretrained(folder_path)
         print("download weights called", flush=True)
